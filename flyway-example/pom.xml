@@ -55,7 +55,7 @@
       <artifactId>spring-webmvc</artifactId>
       <version>${spring.version}</version>
     </dependency>
-    
+
     <!-- <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-orm</artifactId>
@@ -94,10 +94,23 @@
       <version>${org.slf4j-version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>${logback-version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback-version}</version>
+    </dependency>
+
   </dependencies>
 
   <properties>
     <spring.version>3.2.2.RELEASE</spring.version>
     <org.slf4j-version>1.7.7</org.slf4j-version>
+    <logback-version>1.1.2</logback-version>
   </properties>
 </project>

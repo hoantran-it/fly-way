@@ -27,7 +27,7 @@ public class HomeController {
     public String index(ModelMap model) {
 
         String message = "Welcome to Spring Framework";
-        LOGGER.debug("Home controller with welcome message: {}", message);
+        LOGGER.info("Home controller with welcome message: {}", message);
         model.addAttribute("message", message);
 
         return "index";

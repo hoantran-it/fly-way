@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
   <!-- File appender -->
+  <property name="LOG_FOLDER" value="D:/software_development/logs" />
+  
   <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <File>D:/mmt-ws-logs/mmt-ws-dev-log.log</File>
+    <File>${LOG_FOLDER}/flyway-log.log</File>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <FileNamePattern>D:/software_development/logs/fluway-log.%d{yyyy-MM-dd}.log</FileNamePattern>
+      <FileNamePattern>${LOG_FOLDER}/flyway-log.%d{yyyy-MM-dd}.log</FileNamePattern>
       <MaxHistory>30</MaxHistory>
     </rollingPolicy>
 
@@ -21,7 +23,7 @@
     </encoder>
   </appender>
 
-  <root level="INFO">
+  <root level="DEBUG">
     <appender-ref ref="FILE" />
     <appender-ref ref="STDOUT" />
   </root>
