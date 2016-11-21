@@ -23,6 +23,7 @@
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
       <version>2.5</version>
+      <scope>provided</scope>
     </dependency>
 
     <!-- Spring framework -->
@@ -125,6 +126,12 @@
       <version>${logback-version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-core</artifactId>
+      <version>${flyway-version}</version>
+    </dependency>
+
   </dependencies>
 
   <properties>
@@ -133,5 +140,6 @@
     <org.slf4j-version>1.7.7</org.slf4j-version>
     <logback-version>1.1.2</logback-version>
     <org.hibernate-version>4.1.10.Final</org.hibernate-version>
+    <flyway-version>4.0.3</flyway-version>
   </properties>
 </project>

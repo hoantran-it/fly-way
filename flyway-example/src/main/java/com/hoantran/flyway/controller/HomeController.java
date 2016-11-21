@@ -47,7 +47,8 @@ public class HomeController {
     public String getAllUser(ModelMap model) {
 
         List<UserEntity> userList = userRepository.findAll();
-
+        String message = String.format("User name: %s (Age: %s)", userList.get(0).getUserName(), userList.get(0).getAge());
+        model.addAttribute("message", message);
         return "index";
 
     }

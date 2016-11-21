@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:tx="http://www.springframework.org/schema/tx" xsi:schemaLocation="http://www.springframework.org/schema/beans
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd
@@ -9,10 +12,16 @@
        http://www.springframework.org/schema/tx 
        http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+  <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="location">
+      <value>classpath:configuration.properties</value>
+    </property>
+  </bean>
+
   <context:component-scan base-package="com.hoantran.flyway.controller" />
 
   <jpa:repositories base-package="com.hoantran.flyway.repository" />
-  
+
   <!-- Spring view resolver -->
   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
     <property name="prefix">
@@ -25,10 +34,10 @@
 
   <!-- Data source information -->
   <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-    <property name="url" value="jdbc:mysql://localhost:3306/flyway" />
-    <property name="username" value="root" />
-    <property name="password" value="" />
+    <property name="driverClassName" value="${jdbc.driverClassName}" />
+    <property name="url" value="${jdbc.url}" />
+    <property name="username" value="${jdbc.username}" />
+    <property name="password" value="${jdbc.password}" />
   </bean>
 
   <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
@@ -52,4 +61,19 @@
   <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
     <property name="entityManagerFactory" ref="entityManagerFactory" />
   </bean>
+
+  <bean id="flyway" class="com.hoantran.flyway.support.FlywayMigration" init-method="migrateDatabase">
+    <property name="migrateDataSource" ref="dataSource" />
+    <property name="enableMigration">
+      <value type="java.lang.Boolean">${flyway.migration.enable}</value>
+    </property>
+    <property name="baseline">
+      <value type="java.lang.Boolean">${flyway.migration.isBaseline}</value>
+    </property>
+    <property name="migrateScriptPrefix" value="${flyway.migration.script.prefix}" />
+    <property name="migrateScriptSeparator" value="${flyway.migration.script.separator}" />
+    <property name="migrateScriptSuffix" value="${flyway.migration.script.suffix}" />
+    <property name="migrateTable" value="${flyway.migration.table}" />
+  </bean>
+
 </beans>
